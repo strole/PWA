@@ -97,6 +97,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
         dice2.style.display = "none";
         dice.style.display = "none";
       }
+      ac1.start();
     }
   });
   acl.start();
