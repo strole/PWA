@@ -47,7 +47,7 @@ document.getElementById("button").onclick = function () {
 
 navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   if (result.state === "denied") {
-    konzole.innerHTML = "Permission to use accelerometer sensor is denied.";
+    konzola.innerHTML = "Permission to use accelerometer sensor is denied.";
     return;
   } else {
     konzola.innerHTML = "Granted!";
@@ -64,6 +64,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
       navigator.vibrate(1000);
+      ac1.stop();
       setTimeout(function () {
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
@@ -75,6 +76,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           dice2.src = "/dices/dice" + randomNumber2 + ".svg";
           rezultat.innerHTML =
             "Your result is: " + (randomNumber + randomNumber2);
+          ac1.start();
         } else {
           rollingDice.style.display = "none";
           dice2.style.display = "none";
@@ -84,9 +86,9 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           rezultat.innerHTML = "Your result is: " + randomNumber;
         }
         button.disabled = false;
+        ac1.start();
       }, 1000);
       button.disabled = true;
-
       if (checkBox.checked == true) {
         rollingDices.style.display = "block";
         dice2.style.display = "none";
