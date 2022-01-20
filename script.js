@@ -63,6 +63,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
+      ac1.stop();
       navigator.vibrate(1000);
       setTimeout(function () {
         if (checkBox.checked == true) {
