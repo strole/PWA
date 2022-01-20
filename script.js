@@ -8,6 +8,7 @@ const rollingDice = document.getElementById("rollingDice");
 const dice2 = document.getElementById("dice2");
 const dice = document.getElementById("dice");
 const result = document.getElementById("result");
+const button = document.querySelector("button");
 
 document.getElementById("button").onclick = function () {
   setTimeout(function () {
@@ -28,7 +29,10 @@ document.getElementById("button").onclick = function () {
       dice.src = "/dices/dice" + randomNumber + ".svg";
       result.innerHTML = "Your result is: " + randomNumber;
     }
+    button.disabled = false;
   }, 1000);
+  button.disabled = true;
+  navigator.vibrate(1000);
   if (checkBox.checked == true) {
     rollingDices.style.display = "block";
     dice2.style.display = "none";
@@ -60,6 +64,7 @@ if ("LinearAccelerationSensor" in window && "Gyroscope" in window) {
       Math.abs(eventData.acceleration.y) +
       Math.abs(eventData.acceleration.z);
     if (acc > 15) {
+      navigator.vibrate(1000);
       setTimeout(function () {
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
@@ -93,7 +98,4 @@ if ("LinearAccelerationSensor" in window && "Gyroscope" in window) {
   };
 
   window.addEventListener("devicemotion", onDeviceMotion, false);
-} else {
-  document.getElementById("moApi").innerHTML =
-    "No Accelerometer & Gyroscope API available";
 }
