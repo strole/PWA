@@ -63,8 +63,8 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
+      navigator.vibrate(1000);
       setTimeout(function () {
-        navigator.vibrate(1000);
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
           dice2.style.display = "block";
