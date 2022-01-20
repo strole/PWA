@@ -48,6 +48,8 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   if (result.state === "denied") {
     result.innerHTML = "Permission to use accelerometer sensor is denied.";
     return;
+  } else {
+    result.innerHTML = "Permission granted";
   }
 
   let acl = new Accelerometer({ frequency: 30 });
