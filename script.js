@@ -62,9 +62,8 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("error", (error) => (konzola = "Error: " + error.name));
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
-    if (magnitude > 45) {
+    if (magnitude > 50) {
       navigator.vibrate(1000);
-
       setTimeout(function () {
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
@@ -76,7 +75,6 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           dice2.src = "/dices/dice" + randomNumber2 + ".svg";
           rezultat.innerHTML =
             "Your result is: " + (randomNumber + randomNumber2);
-          ac1.start();
         } else {
           rollingDice.style.display = "none";
           dice2.style.display = "none";
@@ -86,19 +84,16 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           rezultat.innerHTML = "Your result is: " + randomNumber;
         }
         button.disabled = false;
-        ac1.start();
       }, 1000);
       button.disabled = true;
       if (checkBox.checked == true) {
         rollingDices.style.display = "block";
         dice2.style.display = "none";
         dice.style.display = "none";
-        ac1.stop();
       } else {
         rollingDice.style.display = "block";
         dice2.style.display = "none";
         dice.style.display = "none";
-        ac1.stop();
       }
     }
   });
