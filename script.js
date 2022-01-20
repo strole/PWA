@@ -64,7 +64,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
       navigator.vibrate(1000);
-      ac1.stop();
+
       setTimeout(function () {
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
@@ -93,10 +93,12 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
         rollingDices.style.display = "block";
         dice2.style.display = "none";
         dice.style.display = "none";
+        ac1.stop();
       } else {
         rollingDice.style.display = "block";
         dice2.style.display = "none";
         dice.style.display = "none";
+        ac1.stop();
       }
     }
   });
