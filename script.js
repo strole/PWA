@@ -57,7 +57,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   let max_magnitude = 0;
   acl.addEventListener(
     "activate",
-    () => (konzola.innerHTML = "Ready to measure.")
+    () => (konzola.innerHTML = "Shake to roll!")
   );
   acl.addEventListener("error", (error) => (konzola = "Error: " + error.name));
   acl.addEventListener("reading", () => {
@@ -72,7 +72,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           dice.src = "/dices/dice" + randomNumber + ".svg";
           let randomNumber2 = Math.floor(Math.random() * 6 + 1);
           dice2.src = "/dices/dice" + randomNumber2 + ".svg";
-          result.innerHTML =
+          konzola.innerHTML =
             "Your result is: " + (randomNumber + randomNumber2);
         } else {
           rollingDice.style.display = "none";
@@ -80,7 +80,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
           dice.style.display = "block";
           let randomNumber = Math.floor(Math.random() * 6 + 1);
           dice.src = "/dices/dice" + randomNumber + ".svg";
-          result.innerHTML = "Your result is: " + randomNumber;
+          konzola.innerHTML = "Your result is: " + randomNumber;
         }
         button.disabled = false;
       }, 1000);
