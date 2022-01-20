@@ -63,6 +63,7 @@ if ("LinearAccelerationSensor" in window && "Gyroscope" in window) {
       Math.abs(eventData.acceleration.x) +
       Math.abs(eventData.acceleration.y) +
       Math.abs(eventData.acceleration.z);
+    result.innerHTML = acc;
     if (acc > 15) {
       navigator.vibrate(1000);
       setTimeout(function () {

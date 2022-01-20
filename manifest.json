@@ -1,6 +1,6 @@
 {
-  "name": "PWA application",
-  "short_name": "PWA",
+  "name": "DICE ROLLER",
+  "short_name": "DICE ROLLER",
   "start_url": "/index.html",
   "scope": ".",
   "background_color": "#6dcdb1",
