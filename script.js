@@ -63,7 +63,6 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
-      ac1.stop();
       navigator.vibrate(1000);
       setTimeout(function () {
         if (checkBox.checked == true) {
@@ -97,7 +96,6 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
         dice2.style.display = "none";
         dice.style.display = "none";
       }
-      ac1.start();
     }
   });
   acl.start();
