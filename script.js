@@ -62,9 +62,39 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("error", (error) => (konzola = "Error: " + error.name));
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
-    if (magnitude > max_magnitude) {
-      max_magnitude = magnitude;
-      konzola.innerHTML = "Max magnitude: " + max_magnitude;
+    if (magnitude > 20) {
+      setTimeout(function () {
+        if (checkBox.checked == true) {
+          rollingDices.style.display = "none";
+          dice2.style.display = "block";
+          dice.style.display = "block";
+          let randomNumber = Math.floor(Math.random() * 6 + 1);
+          dice.src = "/dices/dice" + randomNumber + ".svg";
+          let randomNumber2 = Math.floor(Math.random() * 6 + 1);
+          dice2.src = "/dices/dice" + randomNumber2 + ".svg";
+          result.innerHTML =
+            "Your result is: " + (randomNumber + randomNumber2);
+        } else {
+          rollingDice.style.display = "none";
+          dice2.style.display = "none";
+          dice.style.display = "block";
+          let randomNumber = Math.floor(Math.random() * 6 + 1);
+          dice.src = "/dices/dice" + randomNumber + ".svg";
+          result.innerHTML = "Your result is: " + randomNumber;
+        }
+        button.disabled = false;
+      }, 1000);
+      button.disabled = true;
+      navigator.vibrate(1000);
+      if (checkBox.checked == true) {
+        rollingDices.style.display = "block";
+        dice2.style.display = "none";
+        dice.style.display = "none";
+      } else {
+        rollingDice.style.display = "block";
+        dice2.style.display = "none";
+        dice.style.display = "none";
+      }
     }
   });
   acl.start();
