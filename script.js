@@ -54,7 +54,7 @@ if ("LinearAccelerationSensor" in window && "Gyroscope" in window) {
       );
     }
     lastReadingTimestamp = accelerometer.timestamp;
-    accelerationHandler(accelerometer, "moAccel");
+    result = accelerometer.acceleration.x;
   });
   accelerometer.start();
 } else if ("DeviceMotionEvent" in window) {
