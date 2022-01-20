@@ -62,7 +62,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
   acl.addEventListener("error", (error) => (konzola = "Error: " + error.name));
   acl.addEventListener("reading", () => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
-    if (magnitude > 20) {
+    if (magnitude > 40) {
       setTimeout(function () {
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
