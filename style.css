@@ -1,0 +1,45 @@
+html {
+  background-color: #6dcdb1;
+  align-items: center;
+  width: 80%;
+  padding: 10%;
+  padding-top: 5%;
+  font-family: "Roboto", sans-serif;
+}
+h1 {
+  font-size: 5vh;
+}
+img {
+  width: 35vw;
+  height: auto;
+  margin: auto;
+  flex-basis: auto;
+}
+#button {
+  background-color: #009578;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.gif {
+  width: 60vw;
+  height: auto;
+}
+
+div {
+  margin: auto;
+}
+.container {
+  height: 60%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+h1 {
+  margin: auto;
+}
