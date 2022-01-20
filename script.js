@@ -64,6 +64,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
     let magnitude = Math.hypot(acl.x, acl.y, acl.z);
     if (magnitude > 45) {
       setTimeout(function () {
+        navigator.vibrate(1000);
         if (checkBox.checked == true) {
           rollingDices.style.display = "none";
           dice2.style.display = "block";
@@ -85,7 +86,7 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
         button.disabled = false;
       }, 1000);
       button.disabled = true;
-      navigator.vibrate(1000);
+
       if (checkBox.checked == true) {
         rollingDices.style.display = "block";
         dice2.style.display = "none";
