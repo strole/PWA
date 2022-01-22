@@ -10,7 +10,7 @@ h1 {
   font-size: 5vh;
 }
 img {
-  width: 35vw;
+  width: 30vh;
   height: auto;
   margin: auto;
   flex-basis: auto;
@@ -26,7 +26,7 @@ button {
   font-size: 16px;
 }
 .gif {
-  width: 60vw;
+  width: 50vh;
   height: auto;
 }
 
