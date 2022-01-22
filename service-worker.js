@@ -28,3 +28,13 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(caches.match("/cat.svg"));
   }
 });
+
+self.addEventListener("sync", function (event) {
+  console.log("sync event", event);
+  if (event.tag === "syncAttendees") {
+    event.waitUntil(() => {
+      const response = await fetch("https://catfact.ninja/fact");
+      self.registration.showNotification(response.fact);
+    }); // sending sync request
+  }
+});

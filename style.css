@@ -15,7 +15,7 @@ img {
   margin: auto;
   flex-basis: auto;
 }
-#button {
+button {
   background-color: #009578;
   border: none;
   color: white;
