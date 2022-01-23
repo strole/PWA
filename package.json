@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "https-localhost": "^4.7.0",
     "shake.js": "^1.2.2"
   }
 }
