@@ -29,15 +29,17 @@ self.addEventListener("fetch", (e) => {
   );
 });
 
-self.addEventListener("sync", function (event) {
+self.addEventListener("sync", async function (event) {
   console.log("sync event", event);
-  if (event.tag === "syncAttendees") {
-    event.waitUntil(async () => {
-      const response = await fetch("https://catfact.ninja/fact");
-      self.registration.showNotification("hello", {
-        body: response.fact,
-      });
-    });
-    // sending sync request
-  }
+  let response = await fetch("https://catfact.ninja/fact");
+  let fact = await response.json();
+  console.log(fact);
+  self.registration.showNotification("hello", {
+    body: fact.fact,
+  });
 });
+
+async function loadAPI() {
+  cresponse = await fetch("https://catfact.ninja/fact");
+  return response.fact;
+}
