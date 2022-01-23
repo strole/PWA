@@ -1,3 +1,9 @@
+const httpsLocalhost = require("https-localhost")();
+// const app = ...
+// const port = 443
+const certs = await httpsLocalhost.getCerts();
+const server = https.createServer(certs, app).listen(port);
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
