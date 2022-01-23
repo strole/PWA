@@ -38,8 +38,3 @@ self.addEventListener("sync", async function (event) {
     body: fact.fact,
   });
 });
-
-async function loadAPI() {
-  cresponse = await fetch("https://catfact.ninja/fact");
-  return response.fact;
-}

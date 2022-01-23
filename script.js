@@ -18,6 +18,24 @@ const rezultat = document.getElementById("result");
 const button = document.querySelector("button");
 const konzola = document.getElementById("console");
 const notifyButton = document.getElementById("notifyButton");
+const batteryLevel = document.getElementById("batteryLevel");
+
+if (
+  "getBattery" in navigator ||
+  ("battery" in navigator && "Promise" in window)
+) {
+  var batteryPromise;
+
+  if ("getBattery" in navigator) {
+    batteryPromise = navigator.getBattery();
+  } else {
+    batteryPromise = Promise.resolve(navigator.battery);
+  }
+  console.log(batteryPromise);
+  batteryPromise.then(function (battery) {
+    batteryLevel.innerHTML = battery.level;
+  });
+}
 
 document.getElementById("button").onclick = function () {
   setTimeout(function () {
