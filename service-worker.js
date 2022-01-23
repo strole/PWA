@@ -34,7 +34,7 @@ self.addEventListener("sync", async function (event) {
   let response = await fetch("https://catfact.ninja/fact");
   let fact = await response.json();
   console.log(fact);
-  self.registration.showNotification("hello", {
+  self.registration.showNotification("Cat fact", {
     body: fact.fact,
   });
 });
