@@ -11,6 +11,7 @@ h1 {
 }
 img {
   width: 30%;
+  max-width: 300px;
   height: auto;
   margin: auto;
   flex-basis: auto;
@@ -27,6 +28,7 @@ button {
 }
 .gif {
   width: 60%;
+  max-width: 600px;
   height: auto;
 }
 
