@@ -1,5 +1,12 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
+  navigator.serviceWorker.register("/service-worker.js").then((response) => {
+    return response.pushManager.getSubscription().then(function (subscription) {
+      return response.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: determineAppServerKey(),
+      });
+    });
+  });
 }
 
 const checkBox = document.getElementById("myCheck");
@@ -52,53 +59,51 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
     return;
   } else {
     konzola.innerHTML = "Granted!";
-  }
-
-  let acl = new Accelerometer({ frequency: 30 });
-  let max_magnitude = 0;
-  acl.addEventListener(
-    "activate",
-    () => (konzola.innerHTML = "Shake to roll!")
-  );
-  acl.addEventListener("error", (error) => (konzola = "Error: " + error.name));
-  acl.addEventListener("reading", () => {
-    let magnitude = Math.hypot(acl.x, acl.y, acl.z);
-    if (magnitude > 50) {
-      navigator.vibrate(1000);
-      setTimeout(function () {
+    let acl = new Accelerometer({ frequency: 30 });
+    let max_magnitude = 0;
+    acl.addEventListener(
+      "activate",
+      () => (konzola.innerHTML = "Shake to roll!")
+    );
+    acl.addEventListener("reading", () => {
+      let magnitude = Math.hypot(acl.x, acl.y, acl.z);
+      if (magnitude > 50) {
+        navigator.vibrate(1000);
+        setTimeout(function () {
+          if (checkBox.checked == true) {
+            rollingDices.style.display = "none";
+            dice2.style.display = "block";
+            dice.style.display = "block";
+            let randomNumber = Math.floor(Math.random() * 6 + 1);
+            dice.src = "/dices/dice" + randomNumber + ".svg";
+            let randomNumber2 = Math.floor(Math.random() * 6 + 1);
+            dice2.src = "/dices/dice" + randomNumber2 + ".svg";
+            rezultat.innerHTML =
+              "Your result is: " + (randomNumber + randomNumber2);
+          } else {
+            rollingDice.style.display = "none";
+            dice2.style.display = "none";
+            dice.style.display = "block";
+            let randomNumber = Math.floor(Math.random() * 6 + 1);
+            dice.src = "/dices/dice" + randomNumber + ".svg";
+            rezultat.innerHTML = "Your result is: " + randomNumber;
+          }
+          button.disabled = false;
+        }, 1000);
+        button.disabled = true;
         if (checkBox.checked == true) {
-          rollingDices.style.display = "none";
-          dice2.style.display = "block";
-          dice.style.display = "block";
-          let randomNumber = Math.floor(Math.random() * 6 + 1);
-          dice.src = "/dices/dice" + randomNumber + ".svg";
-          let randomNumber2 = Math.floor(Math.random() * 6 + 1);
-          dice2.src = "/dices/dice" + randomNumber2 + ".svg";
-          rezultat.innerHTML =
-            "Your result is: " + (randomNumber + randomNumber2);
-        } else {
-          rollingDice.style.display = "none";
+          rollingDices.style.display = "block";
           dice2.style.display = "none";
-          dice.style.display = "block";
-          let randomNumber = Math.floor(Math.random() * 6 + 1);
-          dice.src = "/dices/dice" + randomNumber + ".svg";
-          rezultat.innerHTML = "Your result is: " + randomNumber;
+          dice.style.display = "none";
+        } else {
+          rollingDice.style.display = "block";
+          dice2.style.display = "none";
+          dice.style.display = "none";
         }
-        button.disabled = false;
-      }, 1000);
-      button.disabled = true;
-      if (checkBox.checked == true) {
-        rollingDices.style.display = "block";
-        dice2.style.display = "none";
-        dice.style.display = "none";
-      } else {
-        rollingDice.style.display = "block";
-        dice2.style.display = "none";
-        dice.style.display = "none";
       }
-    }
-  });
-  acl.start();
+    });
+    acl.start();
+  }
 });
 
 notifyButton.addEventListener("click", () => {
@@ -118,4 +123,23 @@ function registerBackgroundSync() {
     .then((registration) => registration.sync.register("syncAttendees"))
     .then(() => console.log("Registered background sync"))
     .catch((err) => console.error("Error registering background sync", err));
+}
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+function determineAppServerKey() {
+  var vapidPublicKey =
+    "BJuxA8VJtvf0CVN__kvn2mNZijU2l3rh6qMcxTRFR25LsfWO7CmUqXBuEF3TjC6yu-VFaXUKSZo2cRfq5j7tVWs";
+  return urlBase64ToUint8Array(vapidPublicKey);
 }

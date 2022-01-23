@@ -34,7 +34,10 @@ self.addEventListener("sync", function (event) {
   if (event.tag === "syncAttendees") {
     event.waitUntil(async () => {
       const response = await fetch("https://catfact.ninja/fact");
-      self.registration.showNotification(response.fact);
-    }); // sending sync request
+      self.registration.showNotification("hello", {
+        body: response.fact,
+      });
+    });
+    // sending sync request
   }
 });
