@@ -1,12 +1,5 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js").then((response) => {
-    return response.pushManager.getSubscription().then(function (subscription) {
-      return response.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: determineAppServerKey(),
-      });
-    });
-  });
+  navigator.serviceWorker.register("/service-worker.js");
 }
 
 const checkBox = document.getElementById("myCheck");
@@ -33,7 +26,7 @@ if (
   }
   console.log(batteryPromise);
   batteryPromise.then(function (battery) {
-    batteryLevel.innerHTML = battery.level;
+    batteryLevel.innerHTML = battery.level * 100 + "%";
   });
 }
 
@@ -125,6 +118,14 @@ navigator.permissions.query({ name: "accelerometer" }).then((result) => {
 });
 
 notifyButton.addEventListener("click", () => {
+  navigator.serviceWorker.getRegistration().then((response) => {
+    return response.pushManager.getSubscription().then(function (subscription) {
+      return response.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: determineAppServerKey(),
+      });
+    });
+  });
   Notification.requestPermission((permission) => {
     if (permission === "granted") {
       registerBackgroundSync();
