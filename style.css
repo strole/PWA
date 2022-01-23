@@ -4,7 +4,12 @@ html {
   width: 80%;
   padding: 10%;
   padding-top: 5%;
+  padding-bottom: 0;
   font-family: "Roboto", sans-serif;
+  height: 100vh;
+}
+body {
+  margin: 0;
 }
 h1 {
   font-size: 5vh;
@@ -44,4 +49,9 @@ div {
 }
 h1 {
   margin: auto;
+}
+#notifyButton {
+  background-color: transparent;
+  width: auto;
+  height: 128px;
 }
