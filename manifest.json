@@ -1,7 +1,7 @@
 {
   "name": "DICE ROLLER",
   "short_name": "DICE ROLLER",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": ".",
   "background_color": "#6dcdb1",
   "theme_color": "#009578",
